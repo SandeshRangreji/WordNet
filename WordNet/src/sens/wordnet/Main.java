@@ -20,6 +20,7 @@ public class Main {
 
         if(bag.isEmpty()){
             System.out.println("The bag is empty");
+            In.close();
             return;
         }
 
@@ -27,5 +28,6 @@ public class Main {
         for (String s : bag) {
             System.out.println(s);
         }
+        In.close();
     }
 }
