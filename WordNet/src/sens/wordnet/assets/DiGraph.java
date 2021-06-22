@@ -45,6 +45,16 @@ public class DiGraph {
         return indegree[vertex1];
     }
 
+    //Reverse The Graph
+    public DiGraph reverse() {
+        DiGraph rev = new DiGraph(vertices);
+        for (int i=0;i<vertices;i++){
+            for(int j=0;j<adj[i].size();j++){
+                rev.addEdge(j, i);
+            }
+        }
+        return rev;
+    }
     public String toString() {
         String s="";
         for (int i=0;i<vertices;i++)
@@ -81,6 +91,12 @@ public class DiGraph {
         System.out.println("Number of InDegree for 1: " + graph.inDegree(1));
         System.out.println("Number of OutDegree for 2: " + graph.outDegree(2));
 
+        DiGraph reverse=graph.reverse();
+
+        System.out.println("Number of Edges: " + reverse.noEdges());
+        System.out.println("Number of Vertices: " + reverse.noVertices());
+        System.out.println("Number of InDegree for 1: " + reverse.inDegree(1));
+        System.out.println("Number of InDegree for 3: " + reverse.inDegree(3));
         In.close();
     }
 
