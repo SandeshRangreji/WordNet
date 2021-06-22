@@ -1,6 +1,6 @@
 package sens.wordnet;
 
-import sens.wordnet.assets.Bag;
+import sens.wordnet.services.Bag;
 
 import java.util.Scanner;
 

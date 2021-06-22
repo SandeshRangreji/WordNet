@@ -1,4 +1,4 @@
-package sens.wordnet.assets;
+package sens.wordnet.services;
 
 public class Node<Item> {
     public Item item;
