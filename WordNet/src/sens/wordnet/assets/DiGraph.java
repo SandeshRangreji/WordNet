@@ -46,7 +46,19 @@ public class DiGraph {
     }
 
     public String toString() {
-        return "Example";
+        String s="";
+        for (int i=0;i<vertices;i++)
+        {
+            String st = Integer.toString(i);
+            s=s+st+":";
+            for(int j : adj[i])
+            {
+                String st1 = Integer.toString(j);
+                s=s+st1+" "; 
+            }
+            s=s+"\n"; 
+        }
+        return s.toString();
     }
 
     public static void main(String[] args) {
@@ -63,6 +75,7 @@ public class DiGraph {
                 graph.addEdge(i, v);
             }
         }
+        System.out.println(graph.toString());
         System.out.println("Number of Edges: " + graph.noEdges());
         System.out.println("Number of Vertices: " + graph.noVertices());
         System.out.println("Number of InDegree for 1: " + graph.inDegree(1));
