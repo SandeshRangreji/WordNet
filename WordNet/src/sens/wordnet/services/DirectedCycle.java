@@ -38,4 +38,29 @@ public class DirectedCycle {
         }
         recStack[u] = false;
     }
+
+    public boolean hasCycle(){
+        return cycle!=null;
+    }
+
+    public Iterable<Integer> cycle(){
+        return cycle;
+    }
+
+    public boolean checkCycle(){
+        if(hasCycle()){
+            int first=-1;
+            int last=-1;
+            for (int v : cycle()) {
+                if(first==-1)
+                    first = v;
+                last=v;
+            }
+            if(first!=last){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
