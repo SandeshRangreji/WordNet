@@ -80,6 +80,7 @@ public class DirectedCycle {
                 graph.addEdge(u, v);
             }
         }
+        In.close();
 
         DirectedCycle directedCycle = new DirectedCycle(graph);
         if(directedCycle.checkCycle()){
