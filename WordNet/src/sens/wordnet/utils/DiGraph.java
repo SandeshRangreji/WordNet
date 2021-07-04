@@ -1,6 +1,7 @@
 package sens.wordnet.utils;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 // class for Directed Graph
 public class DiGraph {
@@ -24,6 +25,34 @@ public class DiGraph {
         this.adj = (Bag<Integer>[]) new Bag[this.vertices];
         for (int i = 0; i < this.vertices; i++) {
             this.adj[i] = new Bag<Integer>();
+        }
+    }
+
+    public DiGraph(DiGraph G){
+        if(G == null) throw new IllegalArgumentException("Null Argument");
+
+        this.vertices=G.noVertices();
+        this.edges = G.noEdges();
+        if (noVertices() < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be non-negative");
+
+        indegree = new int[noVertices()];
+        for(int v=0; v < noVertices(); v++){
+            this.indegree[v] = G.inDegree(v);
+        }
+
+        adj = (Bag<Integer>[]) new Bag[V];
+        for (int v = 0; v < noVertices(); v++) {
+            adj[v] = new Bag<Integer>();
+        }
+
+        for (int v = 0; v < G.noVertices(); v++) {
+            Stack<Integer> reverse = new Stack<Integer>();
+            for (int w : G.adj[v]) {
+                reverse.push(w);
+            }
+            for (int w : reverse) {
+                adj[v].add(w);
+            }
         }
     }
 
