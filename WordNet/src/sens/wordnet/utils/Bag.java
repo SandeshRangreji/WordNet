@@ -1,4 +1,4 @@
-package sens.wordnet.services;
+package sens.wordnet.utils;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -32,7 +32,8 @@ public class Bag<Item> implements Iterable<Item> {
         return n;
     }
 
-    // makes an iterator which moves across the bag starting from the recently added item
+    // makes an iterator which moves across the bag starting from the recently added
+    // item
     public Iterator<Item> iterator() {
         return new LinkedIterator<Item>(first);
     }
@@ -50,7 +51,7 @@ public class Bag<Item> implements Iterable<Item> {
             n--;
         }
 
-        if(bag.isEmpty()){
+        if (bag.isEmpty()) {
             // isEmpty() function is used
             System.out.println("The bag is empty");
             In.close();
@@ -61,7 +62,8 @@ public class Bag<Item> implements Iterable<Item> {
 
         System.out.println("Components of bag are:");
         for (String s : bag) {
-            // iterator() function is used internally by utilized by the forEach function used here
+            // iterator() function is used internally by utilized by the forEach function
+            // used here
             System.out.println(s);
         }
         In.close();

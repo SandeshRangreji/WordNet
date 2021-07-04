@@ -1,4 +1,4 @@
-package sens.wordnet.services;
+package sens.wordnet.utils;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -9,30 +9,30 @@ public class DirectedCycle {
     private Stack<Integer> cycle;
     private int[] parent; // list of parent vertex to each vertex in a path
 
-    public DirectedCycle(DiGraph G){
+    public DirectedCycle(DiGraph G) {
         int n = G.noVertices();
         visited = new boolean[n];
         recStack = new boolean[n];
         parent = new int[n];
         // initialize all lists
-        for (int v = 0; v < n; v++){
+        for (int v = 0; v < n; v++) {
             if (!visited[v] && cycle == null)
                 DFS(G, v);
         }
     }
 
-    public void DFS(DiGraph G, int u){
+    public void DFS(DiGraph G, int u) {
         visited[u] = true;
         recStack[u] = true;
-        for (int v : G.adjacentVertices(u)){
-            if (cycle != null) return;
-            else if(!visited[v]){
+        for (int v : G.adjacentVertices(u)) {
+            if (cycle != null)
+                return;
+            else if (!visited[v]) {
                 parent[v] = u;
                 DFS(G, v);
-            }
-            else if (recStack[v]){
+            } else if (recStack[v]) {
                 cycle = new Stack<Integer>();
-                for(int x = u; x != v; x = parent[x]){
+                for (int x = u; x != v; x = parent[x]) {
                     cycle.push(x);
                 }
                 cycle.push(v);
@@ -42,24 +42,24 @@ public class DirectedCycle {
         recStack[u] = false;
     }
 
-    public boolean hasCycle(){
+    public boolean hasCycle() {
         return cycle != null;
     }
 
-    public Iterable<Integer> cycle(){
+    public Iterable<Integer> cycle() {
         return cycle;
     }
 
-    public boolean checkCycle(){
-        if(hasCycle()){
+    public boolean checkCycle() {
+        if (hasCycle()) {
             int first = -1;
             int last = -1;
             for (int v : cycle()) {
-                if(first == -1)
+                if (first == -1)
                     first = v;
                 last = v;
             }
-            if(first != last){
+            if (first != last) {
                 return false;
             }
         }
@@ -71,11 +71,11 @@ public class DirectedCycle {
         System.out.print("Let's make a digraph. \nEnter no. of vertices: ");
         int n = In.nextInt();
         DiGraph graph = new DiGraph(n);
-        for(int u = 0; u < n; u++) {
-            System.out.print("Enter the no. of connected vertices for vertex " + u +": ");
+        for (int u = 0; u < n; u++) {
+            System.out.print("Enter the no. of connected vertices for vertex " + u + ": ");
             int oDegree = In.nextInt();
-            for(int i = 0; i < oDegree; i++) {
-                System.out.print("Enter connected vertex-" + (i+1) + ": ");
+            for (int i = 0; i < oDegree; i++) {
+                System.out.print("Enter connected vertex-" + (i + 1) + ": ");
                 int v = In.nextInt();
                 graph.addEdge(u, v);
             }
@@ -83,13 +83,12 @@ public class DirectedCycle {
         In.close();
 
         DirectedCycle directedCycle = new DirectedCycle(graph);
-        if(directedCycle.checkCycle()){
+        if (directedCycle.checkCycle()) {
             System.out.println("The last directed cycle in this graph is: ");
-            for (int v : directedCycle.cycle()){
+            for (int v : directedCycle.cycle()) {
                 System.out.println(v);
             }
-        }
-        else{
+        } else {
             System.out.println("This graph doesn't contain a directed cycle");
         }
     }

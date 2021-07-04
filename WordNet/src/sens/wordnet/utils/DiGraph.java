@@ -1,4 +1,4 @@
-package sens.wordnet.services;
+package sens.wordnet.utils;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class DiGraph {
     private Bag<Integer>[] adj;
     // list of vertices that have a direct adge to the given vertex
     private int[] indegree;
-    
+
     // Constructor
     public DiGraph(int vertices) {
         // Parameters :
@@ -22,7 +22,7 @@ public class DiGraph {
         this.edges = 0;
         this.indegree = new int[this.vertices];
         this.adj = (Bag<Integer>[]) new Bag[this.vertices];
-        for (int i=0; i<this.vertices; i++) {
+        for (int i = 0; i < this.vertices; i++) {
             this.adj[i] = new Bag<Integer>();
         }
     }
@@ -43,11 +43,12 @@ public class DiGraph {
 
     // Member function to add a directed edge between two given vertices
     public void addEdge(int vertex1, int vertex2) {
-        // Parameters : 
+        // Parameters :
         // vertex1 : Vertex the edge is coming from
         // vertex2 : Vertex the edge is going to
 
-        // adds the destination vertex to the Bag of adjacent vertices of the source vertex
+        // adds the destination vertex to the Bag of adjacent vertices of the source
+        // vertex
         this.adj[vertex1].add(vertex2);
         // increments the indegree of the destination vertex
         this.indegree[vertex2]++;
@@ -57,9 +58,9 @@ public class DiGraph {
 
     // Member function to return a Bag of adjacent vertices to the given vertex
     public Iterable<Integer> adjacentVertices(int vertex1) {
-        // Parameters : 
+        // Parameters :
         // vertex1 : the vertex whose adjacent vertices will be returned
-        // Return : 
+        // Return :
         // Bag of adjacent vertices of the given vertex
         return adj[vertex1];
     }
@@ -68,7 +69,7 @@ public class DiGraph {
     public int outDegree(int vertex1) {
         // Parameter :
         // vertex1 : the given vertex
-        // Return : 
+        // Return :
         // Out Degree of the given vertex
         return adj[vertex1].size();
     }
@@ -77,46 +78,46 @@ public class DiGraph {
     public int inDegree(int vertex1) {
         // Parameter :
         // vertex1 : the given vertex
-        // Return : 
+        // Return :
         // In Degree of the given vertex
         return indegree[vertex1];
     }
 
-    //Reverse The Graph
+    // Reverse The Graph
     public DiGraph reverse() {
         // Return :
         // rev : reverse of the di graph object
 
         // initialise new object for the reverse Di Graph
         DiGraph rev = new DiGraph(vertices);
-        // iterating through vertices and their adjacent vertices to reverse the direction of the edge
-        for (int i=0; i<vertices; i++) {
-            for(int j=0; j<adj[i].size(); j++) {
-                // creating an edge in the new object that has the reverse direction of the respective edge in this object
+        // iterating through vertices and their adjacent vertices to reverse the
+        // direction of the edge
+        for (int i = 0; i < vertices; i++) {
+            for (int j = 0; j < adj[i].size(); j++) {
+                // creating an edge in the new object that has the reverse direction of the
+                // respective edge in this object
                 rev.addEdge(j, i);
             }
         }
         return rev;
     }
 
-    // toString 
+    // toString
     public String toString() {
         // initializing an empty string
         String s = "";
-        for (int i=0;i<vertices;i++)
-        {
+        for (int i = 0; i < vertices; i++) {
             // appends vertex number to the string
             String st = Integer.toString(i);
             s = s + st + ":";
             // iterating through the adjacent vertices of the given vertex
-            for(int j : adj[i])
-            {
+            for (int j : adj[i]) {
                 // appends adjacent vertices to the string
                 String st1 = Integer.toString(j);
-                s = s + st1 + " "; 
+                s = s + st1 + " ";
             }
             // appends a new line character
-            s = s + "\n"; 
+            s = s + "\n";
         }
         return s.toString();
     }
@@ -129,10 +130,10 @@ public class DiGraph {
         // create Di Graph object
         DiGraph graph = new DiGraph(n);
         // taking in input for creating edges to the digraph
-        for(int i=0; i<n; i++) {
-            System.out.print("Enter the no. of connected vertices for vertex " + i +": ");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter the no. of connected vertices for vertex " + i + ": ");
             int noOut = In.nextInt();
-            for(int j=0; j<noOut; j++) {
+            for (int j = 0; j < noOut; j++) {
                 System.out.print("Enter connected vertex: ");
                 int v = In.nextInt();
                 graph.addEdge(i, v);
@@ -146,7 +147,7 @@ public class DiGraph {
         System.out.println("Number of OutDegree for 2: " + graph.outDegree(2));
 
         // Reversing the DiGraph
-        DiGraph reverse=graph.reverse();
+        DiGraph reverse = graph.reverse();
 
         // Printing details on the reversed DiGraph
         System.out.println("Number of Edges: " + reverse.noEdges());

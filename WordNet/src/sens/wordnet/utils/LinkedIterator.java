@@ -1,4 +1,4 @@
-package sens.wordnet.services;
+package sens.wordnet.utils;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -15,7 +15,8 @@ public class LinkedIterator<Item> implements Iterator<Item> {
     }
 
     public Item next() {
-        if (!hasNext()) throw new NoSuchElementException();
+        if (!hasNext())
+            throw new NoSuchElementException();
         Item item = current.item;
         current = current.next;
         return item;

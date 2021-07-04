@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import sens.wordnet.services.DiGraph;
-import sens.wordnet.services.DirectedCycle;
+import sens.wordnet.utils.DiGraph;
+import sens.wordnet.utils.DirectedCycle;
 
 public class WordNet {
 
