@@ -44,8 +44,8 @@ public class SAP {
     private void bfs(Queue<Integer> q1, Queue<Integer> q2){
         while(!q1.isEmpty() || !q2.isEmpty()){
             if(!q1.isEmpty()){
-                int v=q1.dequeue();
-                int s=distTo1[v]+distTo2[v];
+                int v = q1.poll();
+                int s = distTo1[v]+distTo2[v];
                 if(marked2[v]){
                     if( s < length || length==-1){
                         ancestor=v;
@@ -53,18 +53,18 @@ public class SAP {
                     }
                 }
                 if(distTo1[v] < length || length ==-1){
-                    for(int a : copyG.adj(v)){
+                    for(int a : copyG.adjacentVertices(v)){
                         if(!marked1[a]){
                             distTo1[a]=distTo1[v]+1;
                             marked1[a]=true;
                             stack1.push(a);
-                            q1.enqueue(a);
+                            q1.add(a);
                         }
                     }
                 }
             }
             if(!q2.isEmpty()){
-                int v = q2.dequeue();
+                int v = q2.poll();
                 int s = distTo1[v]+distTo2[v];
                 if(marked1[v]){
                     if( s< length || length==-1){
@@ -73,12 +73,12 @@ public class SAP {
                     }
                 }
                 if (distTo2[v] < length || length==-1){
-                    for(int a: copyG.adj(v)){
+                    for(int a: copyG.adjacentVertices(v)){
                         if(!marked2[a]){
                             distTo2[a]=distTo2[v]+1;
                             marked2[a] = true;
                             stack2.push(a);
-                            q2.enqueue(a);
+                            q2.add(a);
                         }
                     }
                 }
