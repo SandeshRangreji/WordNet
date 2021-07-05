@@ -35,17 +35,17 @@ public class DiGraph {
         this.edges = G.noEdges();
         if (noVertices() < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be non-negative");
 
-        indegree = new int[noVertices()];
-        for(int v=0; v < noVertices(); v++){
+        indegree = new int[this.vertices];
+        for(int v=0; v < this.vertices; v++){
             this.indegree[v] = G.inDegree(v);
         }
 
-        adj = (Bag<Integer>[]) new Bag[V];
-        for (int v = 0; v < noVertices(); v++) {
-            adj[v] = new Bag<Integer>();
+        this.adj = (Bag<Integer>[]) new Bag[this.vertices];
+        for (int v = 0; v < this.vertices; v++) {
+            this.adj[v] = new Bag<Integer>();
         }
 
-        for (int v = 0; v < G.noVertices(); v++) {
+        for (int v = 0; v < this.vertices; v++) {
             Stack<Integer> reverse = new Stack<Integer>();
             for (int w : G.adj[v]) {
                 reverse.push(w);
