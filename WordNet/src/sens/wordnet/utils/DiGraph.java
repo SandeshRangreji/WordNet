@@ -122,7 +122,7 @@ public class DiGraph {
         // iterating through vertices and their adjacent vertices to reverse the
         // direction of the edge
         for (int i = 0; i < vertices; i++) {
-            for (int j = 0; j < adj[i].size(); j++) {
+            for(int j: adj[i]){
                 // creating an edge in the new object that has the reverse direction of the
                 // respective edge in this object
                 rev.addEdge(j, i);
@@ -183,6 +183,7 @@ public class DiGraph {
         System.out.println("Number of Vertices: " + reverse.noVertices());
         System.out.println("Number of InDegree for 1: " + reverse.inDegree(1));
         System.out.println("Number of InDegree for 3: " + reverse.inDegree(3));
+        System.out.println(reverse.toString());
         In.close();
     }
 
