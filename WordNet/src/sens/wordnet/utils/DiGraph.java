@@ -179,12 +179,13 @@ public class DiGraph {
         DiGraph reverse = graph.reverse();
 
         // Printing details on the reversed DiGraph
+        System.out.println("Reversed graph is: ");
+        System.out.println(reverse.toString());
         System.out.println("Number of Edges: " + reverse.noEdges());
         System.out.println("Number of Vertices: " + reverse.noVertices());
-        System.out.println("Number of InDegree for 1: " + reverse.inDegree(1));
-        System.out.println("Number of InDegree for 3: " + reverse.inDegree(3));
-        System.out.println(reverse.toString());
+        for(int i = 0; i < reverse.noVertices(); i++){
+            System.out.println("Number of InDegree for " + i + ": " + reverse.inDegree(i));
+        }
         In.close();
     }
-
 }
