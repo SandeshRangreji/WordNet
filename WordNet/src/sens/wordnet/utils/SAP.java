@@ -168,5 +168,6 @@ public class SAP {
         int w = In.nextInt();
         System.out.println("Length of shortest ancestral path is: " + sap.length(v,w));
         System.out.println("Shortest common ancestor is: " + sap.ancestor(v,w));
+        In.close();
     }
 }

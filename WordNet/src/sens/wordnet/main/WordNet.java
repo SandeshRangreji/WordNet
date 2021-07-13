@@ -8,20 +8,29 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import sens.wordnet.utils.DiGraph;
-import sens.wordnet.utils.DirectedCycle;
+import sens.wordnet.utils.*;
 
 public class WordNet {
 
+    // Map that returns ID of a given noun
     private final Map<String, ArrayList<Integer>> noun2ID;
+    // Map that returns noun of the given  ID
     private final Map<Integer, String> ID2Noun;
+    // Number of vertices of WordNet
     private int noVertices;
+    // Shortest Ancestral Path object
+    private SAP sap;
 
+    // Constructor
     public WordNet() {
 
+        // initializing data members
         this.noun2ID = new HashMap<String, ArrayList<Integer>>();
         this.ID2Noun = new HashMap<Integer, String>();
         this.noVertices = 0;
+        // creating the WordNet digraph
+        this.readSynsets();
+        this.readHypernyms();
 
     }
     public Iterable<String> nouns() {
@@ -32,6 +41,40 @@ public class WordNet {
         if (word == null)
             throw new IllegalArgumentException("Input is null.");
         return noun2ID.containsKey(word);           //returns if the word is present in noun2ID 
+    }
+
+    // function to retrieve the shortest ancestor of two given nouns
+    public String shortestAncestralPath(String nounX, String nounY) {
+        // Parameters : 
+        // nounX : a given noun
+        // nounY : a given noun
+        // returns:
+        // ------------to be filled---------------------
+
+        // checks if the given inputs are valid nouns
+        if (!isNoun(nounX) || !isNoun(nounY)) {
+            throw new IllegalArgumentException("Input is not a given WordNet noun.");
+        }
+        
+        // returns the shortest common ancestor to the two given nouns
+        return ID2Noun.get(this.sap.ancestor(noun2ID.get(nounX), noun2ID.get(nounY)));
+    }
+
+    // function to find the distance between two given nouns
+    public int distance(String nounX, String nounY) {   
+        // Parameters : 
+        // nounX : a given noun
+        // nounY : noun to calculate distance from nounX
+        // returns:
+        // ------------to be filled---------------------
+
+        // checks if the given inputs are valid nouns
+        if (!isNoun(nounX) || !isNoun(nounY)) {
+            throw new IllegalArgumentException("Input is not a given WordNet noun.");
+        }
+
+        // returns distance between the nouns
+        return this.sap.length(noun2ID.get(nounX), noun2ID.get(nounY));
     }
 
     public String readLine(Scanner in) {
@@ -77,28 +120,39 @@ public class WordNet {
         }
     }
 
+    // function to read Hypernyms and create a Digraph out of the data
     private void readHypernyms() {
+        // reads file
         File file = new File("D:/WordNet/src/sens/wordnet/assets/hypernyms.txt");
         Scanner in;
         String line;
+        // initialise digraph of words
         DiGraph digraph = new DiGraph(this.noVertices);
         try {
+            // read line by line
             in = new Scanner(file);
             while (in.hasNextLine()) {
+                // reads the given line
                 line = readLine(in);
+                // split the data into id and adjacent nodes
                 String[] seperatedStrings = line.split(",");
+                // no adjacent nodes
                 if (seperatedStrings.length < 2) {
                     continue;
                 }
-                int start = Integer.parseInt(seperatedStrings[0]);
+                // sets current node to the first integer read
+                int currentNode = Integer.parseInt(seperatedStrings[0]);
                 for (int i = 1; i < seperatedStrings.length; ++i) {
-                    digraph.addEdge(start, Integer.parseInt(seperatedStrings[i]));
+                    // sets adjacent nodes to every subsequent integer read
+                    digraph.addEdge(currentNode, Integer.parseInt(seperatedStrings[i]));
                 }
             }
+            // create a directed cycle object out of the digraph to detect cycles
             DirectedCycle dc = new DirectedCycle(digraph);
             if (dc.hasCycle()) {
                 throw new IllegalArgumentException("Cycle detected");
             }
+            // find number of roots of the digraph, there should only be one
             int noRoot = 0;
             for (int i = 0; i < digraph.noVertices(); ++i) {
                 if (digraph.outDegree(i) == 0) {
@@ -111,6 +165,13 @@ public class WordNet {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        // create SAP object out of the digraph
+        this.sap = new SAP(digraph);
+    }
+
+    public static void main(String[] args) {
+        WordNet wordNet = new WordNet();
+            wordNet.isNoun("a");
     }
 
 }
