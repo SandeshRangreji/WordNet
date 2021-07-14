@@ -89,7 +89,7 @@ public class WordNet {
     }
 
     private void readSynsets() {
-        File file = new File("D:/WordNet/src/sens/wordnet/assets/synsets.txt");
+        File file = new File("./src/sens/wordnet/assets/synsets.txt");
         Scanner in;
         try {
             in = new Scanner(file);
@@ -123,7 +123,7 @@ public class WordNet {
     // function to read Hypernyms and create a Digraph out of the data
     private void readHypernyms() {
         // reads file
-        File file = new File("D:/WordNet/src/sens/wordnet/assets/hypernyms.txt");
+        File file = new File("./src/sens/wordnet/assets/hypernyms.txt");
         Scanner in;
         String line;
         // initialise digraph of words
@@ -170,8 +170,18 @@ public class WordNet {
     }
 
     public static void main(String[] args) {
+        // driver for unit testing
+
+        Scanner In = new Scanner(System.in);
+        System.out.print("Enter a word: ");
+        String word1 = In.next();
+        System.out.print("Enter another word: ");
+        String word2 = In.next();
+        // create WordNet object
         WordNet wordNet = new WordNet();
-            wordNet.isNoun("a");
+        int shortestDistance = wordNet.distance(word1, word2);
+        String commonAncestor = wordNet.shortestAncestralPath(word1, word2);
+        System.out.println(commonAncestor + " is the common ancestor of the words " + word1 + " and " + word2 + ", and are at a distance of " + shortestDistance + " from each other.");
     }
 
 }
