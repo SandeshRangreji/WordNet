@@ -14,7 +14,7 @@ public class WordNet {
 
     // Map that returns ID of a given noun
     private final Map<String, ArrayList<Integer>> noun2ID;
-    // Map that returns noun of the given  ID
+    // Map that returns noun of the given ID
     private final Map<Integer, String> ID2Noun;
     // Number of vertices of WordNet
     private int noVertices;
@@ -33,19 +33,20 @@ public class WordNet {
         this.readHypernyms();
 
     }
+
     public Iterable<String> nouns() {
-        return noun2ID.keySet();        //returns all key elements of noun2ID
+        return noun2ID.keySet(); // returns all key elements of noun2ID
     }
 
     public boolean isNoun(String word) {
         if (word == null)
             throw new IllegalArgumentException("Input is null.");
-        return noun2ID.containsKey(word);           //returns if the word is present in noun2ID 
+        return noun2ID.containsKey(word); // returns if the word is present in noun2ID
     }
 
     // function to retrieve the shortest ancestor of two given nouns
     public String shortestAncestralPath(String nounX, String nounY) {
-        // Parameters : 
+        // Parameters :
         // nounX : a given noun
         // nounY : a given noun
         // returns:
@@ -55,14 +56,14 @@ public class WordNet {
         if (!isNoun(nounX) || !isNoun(nounY)) {
             throw new IllegalArgumentException("Input is not a given WordNet noun.");
         }
-        
+
         // returns the shortest common ancestor to the two given nouns
         return ID2Noun.get(this.sap.ancestor(noun2ID.get(nounX), noun2ID.get(nounY)));
     }
 
     // function to find the distance between two given nouns
-    public int distance(String nounX, String nounY) {   
-        // Parameters : 
+    public int distance(String nounX, String nounY) {
+        // Parameters :
         // nounX : a given noun
         // nounY : noun to calculate distance from nounX
         // returns:
@@ -81,28 +82,27 @@ public class WordNet {
         String line;
         try {
             line = in.nextLine();
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             line = null;
         }
         return line;
     }
 
     private void readSynsets() {
-        File file = new File("E:/WordNet/WordNet/src/sens/wordnet/assets/synsets.txt");
+        File file = new File("./src/sens/wordnet/assets/synsets.txt");
         Scanner in;
         try {
             in = new Scanner(file);
             while (in.hasNextLine()) {
                 String combined = readLine(in);
-                String[] separated= combined.split(",");        //segregates id and sentence in synset.txt
+                String[] separated = combined.split(","); // segregates id and sentence in synset.txt
                 if (separated.length < 2) {
                     continue;
                 }
                 ++noVertices;
                 int id = Integer.parseInt(separated[0]);
-                ID2Noun.put(id, separated[1]);                  //pushes into hashmap id and sentence
-                String words[] = separated[1].split(" ");       //segregates into words
+                ID2Noun.put(id, separated[1]); // pushes into hashmap id and sentence
+                String words[] = separated[1].split(" "); // segregates into words
                 for (String word : words) {
                     ArrayList<Integer> ids = noun2ID.get(word);
                     if (ids != null) {
@@ -123,7 +123,7 @@ public class WordNet {
     // function to read Hypernyms and create a Digraph out of the data
     private void readHypernyms() {
         // reads file
-        File file = new File("E:/WordNet/WordNet/src/sens/wordnet/assets/hypernyms.txt");
+        File file = new File("./src/sens/wordnet/assets/hypernyms.txt");
         Scanner in;
         String line;
         // initialise digraph of words
@@ -181,7 +181,8 @@ public class WordNet {
         WordNet wordNet = new WordNet();
         int shortestDistance = wordNet.distance(word1, word2);
         String commonAncestor = wordNet.shortestAncestralPath(word1, word2);
-        System.out.println(commonAncestor + " is the common ancestor of the words " + word1 + " and " + word2 + ", and are at a distance of " + shortestDistance + " from each other.");
+        System.out.println(commonAncestor + " is the common ancestor of the words " + word1 + " and " + word2
+                + ", and are at a distance of " + shortestDistance + " from each other.");
     }
 
 }

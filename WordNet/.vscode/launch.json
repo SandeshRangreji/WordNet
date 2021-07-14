@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "sens.wordnet.Main",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch WordNet",
+            "request": "launch",
+            "mainClass": "sens.wordnet.main.WordNet",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch Bag",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.Bag",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch DiGraph",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.DiGraph",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch DirectedCycle",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.DirectedCycle",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch SAP",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.SAP",
+            "projectName": "WordNet_d2c7eee9"
+        },
+        {
+            "type": "java",
+            "name": "Launch DiGraph(1)",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.DiGraph"
+        },
+        {
+            "type": "java",
+            "name": "Launch SAP(1)",
+            "request": "launch",
+            "mainClass": "sens.wordnet.utils.SAP"
+        }
+    ]
+}
