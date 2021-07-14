@@ -89,7 +89,7 @@ public class WordNet {
     }
 
     private void readSynsets() {
-        File file = new File("./src/sens/wordnet/assets/synsets.txt");
+        File file = new File("E:/WordNet/WordNet/src/sens/wordnet/assets/synsets.txt");
         Scanner in;
         try {
             in = new Scanner(file);
@@ -123,7 +123,7 @@ public class WordNet {
     // function to read Hypernyms and create a Digraph out of the data
     private void readHypernyms() {
         // reads file
-        File file = new File("./src/sens/wordnet/assets/hypernyms.txt");
+        File file = new File("E:/WordNet/WordNet/src/sens/wordnet/assets/hypernyms.txt");
         Scanner in;
         String line;
         // initialise digraph of words
