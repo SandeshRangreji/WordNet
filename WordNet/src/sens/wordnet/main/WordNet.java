@@ -183,6 +183,7 @@ public class WordNet {
         String commonAncestor = wordNet.shortestAncestralPath(word1, word2);
         System.out.println(commonAncestor + " is the common ancestor of the words " + word1 + " and " + word2
                 + ", and are at a distance of " + shortestDistance + " from each other.");
+        In.close();
     }
 
 }
