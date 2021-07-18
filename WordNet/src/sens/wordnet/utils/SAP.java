@@ -7,8 +7,8 @@ public class SAP {
     private int shortestLength;
     // Closest common ancestor to the given vertices
     private int commonAncestor;
-    // Reverse of the given digraph to track the ancestor of each vertex
-    private DiGraph reverse;
+    // Copy of the given digraph to track the ancestor of each vertex
+    private DiGraph copyGraph;
     // Distance to vertex1 from common ancestor
     private int[] distanceTo1;
     // Distance to vertex2 from common ancestor
@@ -30,7 +30,7 @@ public class SAP {
             throw new IllegalArgumentException(" The argument to SAP is null");
         }
         // initializing data members
-        reverse = G.reverse();
+        copyGraph = new DiGraph(G);
         distanceTo1 = new int[G.noVertices()];
         distanceTo2 = new int[G.noVertices()];
         visited1 = new boolean[G.noVertices()];
@@ -62,7 +62,7 @@ public class SAP {
                 }
                 // checks if the distance to vertex 1 is better than the value of shortestLength
                 if (distanceTo1[v] < shortestLength || shortestLength == -1) {
-                    for (int a : reverse.adjacentVertices(v)) {
+                    for (int a : copyGraph.adjacentVertices(v)) {
                         // checks if the vertex exists in path of vertex 1
                         if (!visited1[a]) {
                             // add the vertex to the path and update the distance
@@ -88,7 +88,7 @@ public class SAP {
                 }
                 // checks if the distance to vertex 2 is better than the value of shortestLength
                 if (distanceTo2[v] < shortestLength || shortestLength == -1) {
-                    for (int a : reverse.adjacentVertices(v)) {
+                    for (int a : copyGraph.adjacentVertices(v)) {
                         // checks if the vertex exists in path of vertex 2
                         if (!visited2[a]) {
                             // add the vertex to the path and update the distance
