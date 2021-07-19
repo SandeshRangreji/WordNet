@@ -35,13 +35,15 @@ public class WordNet {
     }
 
     public Iterable<String> nouns() {
-        return noun2ID.keySet(); // returns all key elements of noun2ID
+        // returns all key elements of noun2ID
+        return noun2ID.keySet(); 
     }
 
     public boolean isNoun(String word) {
         if (word == null)
             throw new IllegalArgumentException("Input is null.");
-        return noun2ID.containsKey(word); // returns if the word is present in noun2ID
+            // returns if the word is present in noun2ID
+        return noun2ID.containsKey(word); 
     }
 
     // function to retrieve the shortest ancestor of two given nouns
@@ -78,6 +80,7 @@ public class WordNet {
         return this.sap.length(noun2ID.get(nounX), noun2ID.get(nounY));
     }
 
+    //Function to read each line in file until the end of file
     public String readLine(Scanner in) {
         String line;
         try {
@@ -88,21 +91,27 @@ public class WordNet {
         return line;
     }
 
+    //Function to read synsets text file
     private void readSynsets() {
+        //reads file
         File file = new File("./src/sens/wordnet/assets/synsets.txt");
         Scanner in;
         try {
             in = new Scanner(file);
             while (in.hasNextLine()) {
                 String combined = readLine(in);
-                String[] separated = combined.split(","); // segregates id and sentence in synset.txt
+                //the above string variable contains both id and nouns 
+                // below code segregates id and sentence in synset.txt
+                String[] separated = combined.split(",");
                 if (separated.length < 2) {
                     continue;
                 }
                 ++noVertices;
                 int id = Integer.parseInt(separated[0]);
-                ID2Noun.put(id, separated[1]); // pushes into hashmap id and sentence
-                String words[] = separated[1].split(" "); // segregates into words
+                ID2Noun.put(id, separated[1]); 
+                // pushes into hashmap id and sentence
+                String words[] = separated[1].split(" "); 
+                // segregates into words
                 for (String word : words) {
                     ArrayList<Integer> ids = noun2ID.get(word);
                     if (ids != null) {
