@@ -185,7 +185,10 @@ public class SAP {
 
         // use the compute helper function
         compute(v, w);
-        return shortestLength;
+        int curLength = shortestLength;
+        shortestLength = -1;
+        commonAncestor = -1;
+        return curLength;
 
     }
 
@@ -198,7 +201,10 @@ public class SAP {
 
         // use the compute helper function
         compute(v, w);
-        return commonAncestor;
+        int curAncestor = commonAncestor;
+        shortestLength = -1;
+        commonAncestor = -1;
+        return curAncestor;
 
     }
 
@@ -211,7 +217,10 @@ public class SAP {
 
         // use the compute helper function
         compute(v, w);
-        return shortestLength;
+        int curLength = shortestLength;
+        shortestLength = -1;
+        commonAncestor = -1;
+        return curLength;
     }
 
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
@@ -223,8 +232,10 @@ public class SAP {
 
         // use the compute helper function
         compute(v, w);
-        return commonAncestor;
-
+        int curAncestor = commonAncestor;
+        shortestLength = -1;
+        commonAncestor = -1;
+        return curAncestor;
     }
 
     public static void main(String[] args) {
