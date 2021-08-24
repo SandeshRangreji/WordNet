@@ -12,7 +12,7 @@ public class DiGraph {
     private int edges;
     // Bag of bags that contains the adjacent vertices to the given vertex
     private Bag<Integer>[] adj;
-    // list of vertices that have a direct adge to the given vertex
+    // list of vertices that have a direct edge to the given vertex
     private int[] indegree;
 
     // Constructor
@@ -28,15 +28,17 @@ public class DiGraph {
         }
     }
 
-    public DiGraph(DiGraph G){
-        if(G == null) throw new IllegalArgumentException("Null Argument");
+    public DiGraph(DiGraph G) {
+        if (G == null)
+            throw new IllegalArgumentException("Null Argument");
 
-        this.vertices=G.noVertices();
+        this.vertices = G.noVertices();
         this.edges = G.noEdges();
-        if (noVertices() < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be non-negative");
+        if (noVertices() < 0)
+            throw new IllegalArgumentException("Number of vertices in a Digraph must be non-negative");
 
         indegree = new int[this.vertices];
-        for(int v=0; v < this.vertices; v++){
+        for (int v = 0; v < this.vertices; v++) {
             this.indegree[v] = G.inDegree(v);
         }
 
@@ -117,12 +119,12 @@ public class DiGraph {
         // Return :
         // rev : reverse of the di graph object
 
-        // initialise new object for the reverse Di Graph
+        // initialize new object for the reverse Di Graph
         DiGraph rev = new DiGraph(vertices);
         // iterating through vertices and their adjacent vertices to reverse the
         // direction of the edge
         for (int i = 0; i < vertices; i++) {
-            for(int j: adj[i]){
+            for (int j : adj[i]) {
                 // creating an edge in the new object that has the reverse direction of the
                 // respective edge in this object
                 rev.addEdge(j, i);
@@ -183,7 +185,7 @@ public class DiGraph {
         System.out.println(reverse.toString());
         System.out.println("Number of Edges: " + reverse.noEdges());
         System.out.println("Number of Vertices: " + reverse.noVertices());
-        for(int i = 0; i < reverse.noVertices(); i++){
+        for (int i = 0; i < reverse.noVertices(); i++) {
             System.out.println("Number of InDegree for " + i + ": " + reverse.inDegree(i));
         }
         In.close();
